@@ -23,6 +23,11 @@ pipeline {
         sh "docker pull $IMAGE_TO_SCAN"
       }
     }
+    stage('scan the image') {
+      steps {
+        sh "docker scout cves $IMAGE_TO_SCAN"
+      }
+    }
   }
   post {
     always {
