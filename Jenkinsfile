@@ -2,7 +2,7 @@ pipeline {
   agent any
   environment {
     DH_CREDS=credentials('dh-creds')
-    IMAGE_TO_SCAN='golang:1.11.0-alpine'
+    IMAGE_TO_SCAN='jenkins/jenkins:2.222.1-jdk11'
   }
   stages {
     stage('verify docker scout') {
