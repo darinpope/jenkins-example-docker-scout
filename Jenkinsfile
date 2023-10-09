@@ -2,7 +2,7 @@ pipeline {
   agent any
   environment {
     DH_CREDS=credentials('dh-creds')
-    IMAGE_TO_SCAN='jenkins/jenkins:2.414.2'
+    IMAGE_TO_SCAN='golang:1.11.0-alpine'
   }
   stages {
     stage('verify docker scout') {
@@ -30,7 +30,7 @@ pipeline {
     }
     stage('scan the image') {
       steps {
-        sh "docker scout cves --exit-code  --ignore-base $IMAGE_TO_SCAN"
+        sh "docker scout cves $IMAGE_TO_SCAN"
       }
     }
     stage('cves help') {
