@@ -4,8 +4,8 @@ pipeline {
     stage('verify docker scout') {
       steps {
         sh '''
-          docker --version
-          docker scout --version
+          docker scout version
+          docker version
         '''
       }
     }
