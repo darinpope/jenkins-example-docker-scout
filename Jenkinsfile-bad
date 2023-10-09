@@ -1,0 +1,32 @@
+pipeline {
+  agent any
+  environment {
+    DH_CREDS=credentials('dh-creds')
+    IMAGE_TO_SCAN='jenkins/jenkins:2.222.1-jdk11'
+  }
+  stages {
+    stage('verify docker scout') {
+      steps {
+        sh '''
+          docker scout version
+          docker version
+        '''
+      }
+    }
+    stage('Login to Docker Hub') {
+      steps {
+        sh 'echo $DH_CREDS_PSW | docker login -u $DH_CREDS_USR --password-stdin'
+      }
+    }
+    stage('pull a problematic image') {
+      steps {
+        sh "docker pull $IMAGE_TO_SCAN"
+      }
+    }
+  }
+  post {
+    always {
+      sh 'docker logout'
+    }
+  }
+}
