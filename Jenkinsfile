@@ -2,7 +2,7 @@ pipeline {
   agent any
   environment {
     DH_CREDS=credentials('dh-creds')
-    IMAGE_TO_SCAN='jenkins/jenkins:2.222.1'
+    IMAGE_TO_SCAN='jenkins/jenkins:2.414.2'
   }
   stages {
     stage('verify docker scout') {
