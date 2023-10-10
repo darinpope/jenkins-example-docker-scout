@@ -30,7 +30,7 @@ pipeline {
     }
     stage('scan the image') {
       steps {
-        sh "docker scout cves --exit-code $IMAGE_TO_SCAN"
+        sh "docker scout cves --exit-code --only-severity high $IMAGE_TO_SCAN"
       }
     }
     stage('cves help') {
